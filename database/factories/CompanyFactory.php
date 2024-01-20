@@ -2,15 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Company>
  */
-class UserFactory extends Factory
+class CompanyFactory extends Factory
 {
     /**
      * The current password being used by the factory.
@@ -24,20 +23,15 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $CompanyIds = array_values(Company::pluck('id')->toArray());
-
+        // $CompanyIds = array_values(Company::limit(1)->pluck('id')->toArray());
         return [
-            'name' => fake()->name(),
+            'name' => fake()->company(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             // 'password' => static::$password ??= Hash::make('password'),
             'password' => Hash::make('12345678'),
-            // 'remember_token' => Str::random(10),
-            'tel' => '090' . fake()->randomNumber(8),
+            'tel' => '03' . fake()->randomNumber(8),
             'postcode' => fake()->postcode(),
             'address' => fake()->address(),
-            'flag' => 1,
-            'company_id' => fake()->randomElement($CompanyIds),
             'created_at' =>now(),
             'updated_at' =>now(),
         ];
@@ -49,7 +43,7 @@ class UserFactory extends Factory
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+            'deleted_at' => null,
         ]);
     }
 }
