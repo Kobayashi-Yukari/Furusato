@@ -3,6 +3,7 @@
 namespace App\Console\Commands\MakeCrudLibrary;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class MakeCrud extends Command
 {
@@ -43,12 +44,12 @@ class MakeCrud extends Command
     {
         // パラメータ整形
         $this->modelName = $this->argument('modelName');
-        $this->snakeModelName = \Str::snake($this->modelName);
-        $this->snakeModelNamePlural = \Str::plural($this->snakeModelName);
-        $this->camelModelName = \Str::camel($this->modelName);
-        $this->camelModelNamePlural = \Str::plural($this->camelModelName);
+        $this->snakeModelName = Str::snake($this->modelName);
+        $this->snakeModelNamePlural = Str::plural($this->snakeModelName);
+        $this->camelModelName = Str::camel($this->modelName);
+        $this->camelModelNamePlural = Str::plural($this->camelModelName);
         $this->dirName = $this->option('dirName');
-        $this->snakeDirName = \Str::snake($this->dirName);
+        $this->snakeDirName = Str::snake($this->dirName);
 
         // モデル作成
         \Artisan::call("make:model {$this->modelName} -fm");
