@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'user',
         'passwords' => 'users',
     ],
 
@@ -36,10 +36,20 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'user' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        // admin用を追加
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        // customer用を追加
+        // 'customer' => [
+        //     'driver' => 'session',
+        //     'provider' => 'customers',
+        // ],
     ],
 
     /*
@@ -64,11 +74,16 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
+        // // admin用を追加
+        //     'admins' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Admin::class,
         // ],
+        // // customer用を追加
+        // 'customers' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Customer::class,
+        // ]
     ],
 
     /*
@@ -90,13 +105,29 @@ return [
     |
     */
 
+    // パスワードリセットに使用するブローカーを指定します。
     'passwords' => [
         'users' => [
             'provider' => 'users',
             'table' => 'password_reset_tokens',
-            'expire' => 60,
+            'expire' => 2880,
             'throttle' => 60,
         ],
+        // // admin用を追加
+        // 'admins' => [
+        //     'provider' => 'admins',
+        //     'table' => 'password_resets',
+        //     'expire' => 2880,
+        //     'throttle' => 60,
+        // ],
+
+        // // customer用を追加
+        // 'customers' => [
+        //     'provider' => 'customers',
+        //     'table' => 'password_resets',
+        //     'expire' => 2880,
+        //     'throttle' => 60,
+        // ]
     ],
 
     /*

@@ -20,3 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// 開発中ログイン(ユーザー)
+Route::get('user_dev_login', function () {
+    abort_unless(app()->environment('local'), 403);
+    auth()->guard('user')->login(App\Models\User::first());
+    return to_route('user.home');
+})->name('user_dev_login');
+
+Route::get('user_dev_login_id/{id}', function ($id) {
+    abort_unless(app()->environment('local'), 403);
+    auth()->guard('user')->login(App\Models\User::find($id));
+    return to_route('user.home');
+})->name('user_dev_login_id');
