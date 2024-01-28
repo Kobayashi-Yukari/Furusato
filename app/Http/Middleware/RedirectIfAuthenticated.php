@@ -6,27 +6,41 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated
-{
+{   //config/appで定義
+    private const GUARD_USER = 'user';
+    private const GUARD_ADMIN = 'admin';
+    private const GUARD_PRODUCER = 'producer';
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param  string|null  ...$guards
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, string ...$guards): Response
+    public function handle(Request $request, Closure $next, ...$guards)
     {
-        $guards = empty($guards) ? [null] : $guards;
+        // $guards = empty($guards) ? [null] : $guards;
+        // //Authのガードでチェックしてログインしてたらリダイレクト
+        // foreach ($guards as $guard) {
+        //     if (Auth::guard($guard)->check()) {
+        //         return redirect(RouteServiceProvider::HOME);
+        //     }
+        // }
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check() && $guard === 'user') {
-                return redirect(RouteServiceProvider::HOME);
-            // } elseif (Auth::guard($guard)->check() && $guard === 'admin') {
-            //     return redirect(RouteServiceProvider::ADMIN_HOME);
-            // } elseif (Auth::guard($guard)->check() && $guard === 'customer') {
-            //     return redirect(RouteServiceProvider::CUSTOMER_HOME);
-            }
+        //もしuserとして認証してるか、またはuser関連のURLなら
+        if(Auth::guard(self::GUARD_USER)->check()&& $request->routeIs('user.*')){
+            return redirect(RouteServiceProvider::HOME);
+        }
+
+        if(Auth::guard(self::GUARD_ADMIN)->check()&& $request->routeIs('admin.*')){
+            return redirect(RouteServiceProvider::ADMIN_HOME);
+        }
+
+        if(Auth::guard(self::GUARD_PRODUCER)->check()&& $request->routeIs('producer.*')){
+            return redirect(RouteServiceProvider::PRODUCER_HOME);
         }
 
         return $next($request);

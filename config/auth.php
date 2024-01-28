@@ -35,23 +35,21 @@ return [
     |
     */
 
+    // 認証の方式を指定します。
     'guards' => [
         'user' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        // admin用を追加
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'admins', // これは実際のプロバイダ名に合わせて修正してください
         ],
-        // customer用を追加
-        // 'customer' => [
-        //     'driver' => 'session',
-        //     'provider' => 'customers',
-        // ],
+        'producer' => [
+            'driver' => 'session',
+            'provider' => 'producers', // これは実際のプロバイダ名に合わせて修正してください
+        ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -74,16 +72,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        // // admin用を追加
-        //     'admins' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\Admin::class,
-        // ],
-        // // customer用を追加
-        // 'customers' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\Customer::class,
-        // ]
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class, // これは実際のモデル名に合わせて修正してください
+        ],
+        'producers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Producer::class, // これは実際のモデル名に合わせて修正してください
+        ],
     ],
 
     /*
@@ -113,21 +109,21 @@ return [
             'expire' => 2880,
             'throttle' => 60,
         ],
-        // // admin用を追加
-        // 'admins' => [
-        //     'provider' => 'admins',
-        //     'table' => 'password_resets',
-        //     'expire' => 2880,
-        //     'throttle' => 60,
-        // ],
+        // admin用を追加
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 2880,
+            'throttle' => 60,
+        ],
 
-        // // customer用を追加
-        // 'customers' => [
-        //     'provider' => 'customers',
-        //     'table' => 'password_resets',
-        //     'expire' => 2880,
-        //     'throttle' => 60,
-        // ]
+        // producer用を追加
+        'producers' => [
+            'provider' => 'producers',
+            'table' => 'password_resets',
+            'expire' => 2880,
+            'throttle' => 60,
+        ]
     ],
 
     /*

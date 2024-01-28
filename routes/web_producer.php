@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\User\Auth\LoginController;
-use App\Http\Controllers\User\HomeController;
-use App\Http\Controllers\User\Auth\ForgotPasswordController;
-use App\Http\Controllers\User\Auth\ResetPasswordController;
+use App\Http\Controllers\Producer\Auth\LoginController;
+use App\Http\Controllers\Producer\HomeController;
+use App\Http\Controllers\Producer\Auth\ForgotPasswordController;
+use App\Http\Controllers\Producer\Auth\ResetPasswordController;
+use App\Http\Controllers\Producter\ProducerController;
 
 // 全ルートに二重送信防止処理
 // Route::middleware(['check.multi.submit'])->group(function () {
