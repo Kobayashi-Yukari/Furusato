@@ -5,7 +5,7 @@ use App\Http\Controllers\Producer\Auth\LoginController;
 use App\Http\Controllers\Producer\HomeController;
 use App\Http\Controllers\Producer\Auth\ForgotPasswordController;
 use App\Http\Controllers\Producer\Auth\ResetPasswordController;
-use App\Http\Controllers\Producter\ProducerController;
+use App\Http\Controllers\Producer\ProducerController;
 
 // 全ルートに二重送信防止処理
 // Route::middleware(['check.multi.submit'])->group(function () {
@@ -25,6 +25,8 @@ use App\Http\Controllers\Producter\ProducerController;
 
     //     // TOPページ
         Route::get('/home', [HomeController::class, 'home'])->name('home');
+
+        Route::resource('producers', ProducerController::class);
     //     // パスワード変更
     //     Route::get('passwords/edit', [PasswordController::class, 'edit'])->name('passwords.edit');
     //     Route::patch('passwords', [PasswordController::class, 'update'])->name('passwords.update');

@@ -24,7 +24,7 @@ class Authenticate extends Middleware
     // protected $customer_route = 'customer.login';
 
     protected $user_route = 'user.login';
-    protected $owner_route = 'owner.login';
+    protected $producer_route = 'producer.login';
     protected $admin_route = 'admin.login';
 
     /**
@@ -36,36 +36,18 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {   //もしリクエストはjsonじゃなかったら
-        if (! $request->expectsJson()) {
-            //もしowner関連のURLじゃなかったら$owner_routeへ飛ばす
-            if(Route::is('owner.*')){
+        if (!$request->expectsJson()) {
+            //もしproducer関連のURLじゃなかったら$owner_routeへ飛ばす
+            if(Route::is('producer.*')){
                 //$this->で上のプロパティ呼び出し
-                return route($this->owner_route);
+                return route($this->producer_route);
                 //admin関連のURLでなかったらadminへ飛ばす
-            } elseif(Route::id('admin*')){
+            } elseif(Route::is('admin*')){
                 return route($this->admin_route);
-                //ownerでもadminでもなかったらユーザーへ飛ばす
             } else {
                 return route($this->user_route);
             }
         }
     }
-    // protected function redirectTo(Request $request): ?string
-    // {
 
-    //     if (request()->routeIs('admin.*')) {
-    //         return $request->expectsJson() ? null : route('admin.login');
-    //     }
-    //     return $request->expectsJson() ? null : route('login');
-    //     // ルーティングに応じて未ログイン時のリダイレクト先を振り分ける
-    //     // if (!$request->expectsJson()) {
-    //     //     if (Route::is('user.*')) {
-    //     //         return route($this->user_route);
-    //     //     } elseif (Route::is('admin.*')) {
-    //     //         return route($this->admin_route);
-    //     //     } elseif (Route::is('customer.*')) {
-    //     //         return route($this->customer_route);
-    //     //     }
-    //     // }
-    // }
 }

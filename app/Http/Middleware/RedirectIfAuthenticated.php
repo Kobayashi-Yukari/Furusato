@@ -29,7 +29,6 @@ class RedirectIfAuthenticated
         //         return redirect(RouteServiceProvider::HOME);
         //     }
         // }
-
         //もしuserとして認証してるか、またはuser関連のURLなら
         if(Auth::guard(self::GUARD_USER)->check()&& $request->routeIs('user.*')){
             return redirect(RouteServiceProvider::HOME);

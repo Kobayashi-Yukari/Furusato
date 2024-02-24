@@ -28,7 +28,7 @@ class ProducerController extends Controller
      */
     public function index(Request $request)
     {
-        return view('producer.producers.index', [
+        return view('producers.index', [
             'producers' => Producer::latest()->paginate(12),
         ]);
     }
@@ -40,7 +40,7 @@ class ProducerController extends Controller
      */
     public function create()
     {        
-        return view('producer.producers.create');
+        return view('producers.create');
     }
 
     /**
@@ -50,10 +50,7 @@ class ProducerController extends Controller
      */
     public function show(Producer $producer)
     {        
-        
-        $producer = Producer::find($producer->id);
-
-        return view('producer.producers.show', [
+        return view('producers.show', [
             'producer' => $producer,
         ]);
     }
@@ -69,7 +66,7 @@ class ProducerController extends Controller
     {
         $this->producer->fill($request->substitutable())->save();
 
-        return to_route('producer.producers.index')->with('status', '作成しました');
+        return to_route('producers.index')->with('status', '作成しました');
     }
 
     /**
@@ -79,7 +76,7 @@ class ProducerController extends Controller
      */
     public function edit(Producer $producer)
     {
-        return view('producer.producers.edit', [
+        return view('producers.edit', [
             'producer' => $producer,
         ]);
     }
@@ -94,7 +91,6 @@ class ProducerController extends Controller
      */
     public function update(UpdateRequest $request, Producer $producer)
     {
-
         $producer->fill($request->substitutable())->save();
 
         return back()->with('status', '更新しました');
@@ -111,6 +107,6 @@ class ProducerController extends Controller
     {
         $producer->delete();
 
-        return to_route('producer.producers.index')->with('status', '削除しました');
+        return to_route('producers.index')->with('status', '削除しました');
     }
 }
