@@ -3,7 +3,7 @@ name: Deploy_Furusato
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   build:
