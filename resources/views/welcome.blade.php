@@ -1,32 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <body>
-    <h1>Binary Image Sample</h1>
-    <!-- <img id="image" src="https://s3test-0320.s3.ap-northeast-1.amazonaws.com/export.png" alt="binary image" /> -->
-    <img id="image" src="data:image/png;base64,HERE_IS_BINARY_CODE" alt="binary image" />
-    <button onclick="showImage()">click</button>
+    <button id="loadImage">Click to Load Image</button>
+    <div id="imageContainer"></div>
+
     <script>
-    function showImage() {
-        const raw = JSON.stringify({image: 'sample.png'});
-        const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
-        const requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow',
-        };
-        fetch('https://zxds7eddl6.execute-api.ap-northeast-1.amazonaws.com/test/test', requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            const binaryData = JSON.parse(result).body;
-            const imgElem = document.getElementById('image');
-            imgElem.src = "data:image/png;base64," + binaryData;
-        })
-        .catch(error => {
-            console.log(error);
+        document.getElementById("loadImage").addEventListener("click", function() {
+            fetch('https://zxds7eddl6.execute-api.ap-northeast-1.amazonaws.com/test/test')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("imageContainer").innerHTML = `<img src="${data.imageUrl}" alt="Image">`;
+            })
+            .catch(error => console.error('Error:', error));
         });
-    }
     </script>
 </body>
 </html>
