@@ -16,6 +16,7 @@
                 imgElement.src = imageUrl;
                 imgElement.alt = "Image";
                 document.getElementById("imageContainer").appendChild(imgElement);
+                console.log(response.json());
             })
             .catch(error => console.error('Error:', error));
         });
