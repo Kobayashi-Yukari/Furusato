@@ -2,7 +2,8 @@
 <html lang="ja">
 <body>
     <h1>Binary Image Sample</h1>
-    <img id="image" src="https://s3test-0320.s3.ap-northeast-1.amazonaws.com/export.png" alt="binary image" />
+    <!-- <img id="image" src="https://s3test-0320.s3.ap-northeast-1.amazonaws.com/export.png" alt="binary image" /> -->
+    <img id="image" src="data:image/png;base64,HERE_IS_BINARY_CODE" alt="binary image" />
     <button onclick="showImage()">click</button>
     <script>
     function showImage() {
@@ -15,7 +16,7 @@
         body: raw,
         redirect: 'follow',
         };
-        fetch('https://API_GATEWAY_ID.execute-api.ap-northeast-1.amazonaws.com/test', requestOptions)
+        fetch('https://zxds7eddl6.execute-api.ap-northeast-1.amazonaws.com/test', requestOptions)
         .then(response => response.text())
         .then(result => {
             const binaryData = JSON.parse(result).body;
