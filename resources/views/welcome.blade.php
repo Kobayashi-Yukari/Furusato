@@ -10,7 +10,7 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("imageContainer").innerHTML = `<img src="${data.imageUrl}" alt="Image">`;
-                console.log(ata.imageUrl);
+                console.log(data.imageUrl);
             })
             .catch(error => console.error('Error:', error));
         });
