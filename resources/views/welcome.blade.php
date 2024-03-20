@@ -16,7 +16,7 @@
         body: raw,
         redirect: 'follow',
         };
-        fetch('https://zxds7eddl6.execute-api.ap-northeast-1.amazonaws.com/test', requestOptions)
+        fetch('https://zxds7eddl6.execute-api.ap-northeast-1.amazonaws.com/test/test', requestOptions)
         .then(response => response.text())
         .then(result => {
             const binaryData = JSON.parse(result).body;
