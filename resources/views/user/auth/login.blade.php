@@ -24,7 +24,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <img src="https://s3testbaket-0320.s3.ap-northeast-1.amazonaws.com/export.png">
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
