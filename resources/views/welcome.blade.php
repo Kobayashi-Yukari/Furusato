@@ -2,7 +2,7 @@
 <html lang="ja">
 <body>
     <h1>Binary Image Sample</h1>
-    <img id="image" src="https://s3testbaket-0320.s3.ap-northeast-1.amazonaws.com/export.png" alt="binary image" />
+    <img id="image" src="https://s3test-0320.s3.ap-northeast-1.amazonaws.com/export.png" alt="binary image" />
     <button onclick="showImage()">click</button>
     <script>
     function showImage() {
