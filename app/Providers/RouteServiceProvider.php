@@ -27,6 +27,10 @@ class RouteServiceProvider extends ServiceProvider
     // Producerのリダイレクト先
     public const PRODUCER_HOME = '/producer/home';
 
+    // Customerのリダイレクト先
+    public const CUSTOMER_HOME = '/customer/home';
+ 
+
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
@@ -58,6 +62,11 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('producer')
             ->name('producer.')
             ->group(base_path('routes/web_producer.php'));
+
+            Route::middleware('web')
+            ->prefix('customer')
+            ->name('customer.')
+            ->group(base_path('routes/web_customer.php'));
         });
     }
 }

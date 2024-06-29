@@ -21,11 +21,11 @@ class Authenticate extends Middleware
     /**
      * @var string
      */
-    // protected $customer_route = 'customer.login';
 
-    protected $user_route = 'user.login';
+    protected $user_route     = 'user.login';
+    protected $admin_route    = 'admin.login';
     protected $producer_route = 'producer.login';
-    protected $admin_route = 'admin.login';
+    protected $customer_route = 'customer.login';
 
     /**
      * Get the path the user should be redirected to when they are not authenticated.
@@ -37,13 +37,20 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {   //もしリクエストはjsonじゃなかったら
         if (!$request->expectsJson()) {
-            //もしproducer関連のURLじゃなかったら$owner_routeへ飛ばす
+
+            //もしproducer関連のURLであれば,producer_routeへ飛ばす
             if(Route::is('producer.*')){
                 //$this->で上のプロパティ呼び出し
                 return route($this->producer_route);
-                //admin関連のURLでなかったらadminへ飛ばす
+
+            //もしcustomer関連のURLであれば,customer_routeへ飛ばす
+            } elseif(Route::is('customer*')){
+                return route($this->customer_route);
+
+            //もしadmin関連のURLであれば,admin_routeへ飛ばす
             } elseif(Route::is('admin*')){
                 return route($this->admin_route);
+
             } else {
                 return route($this->user_route);
             }

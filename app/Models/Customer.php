@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Builder;
 
-class User extends Authenticatable
+class Customer extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -43,16 +42,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    /**
-     * 渡されたuser_idのユーザー情報を取得する
-     * また、取得するユーザーはsoft deleteしたものも含める。
-     */
-    public static function getUserData(int $userId): self | Builder
-    {
-
-        $user = self::where('id', $userId)->first();
-
-        return $user;
-    }
 }
