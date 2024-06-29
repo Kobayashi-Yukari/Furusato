@@ -5,6 +5,8 @@ use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\Auth\ResetPasswordController;
+// use App\Http\Controllers\User\Auth\PasswordController;
+use App\Http\Controllers\User\UserController;
 
 // 全ルートに二重送信防止処理
 // Route::middleware(['check.multi.submit'])->group(function () {
@@ -22,11 +24,14 @@ use App\Http\Controllers\User\Auth\ResetPasswordController;
     // ログイン認証後
     // Route::middleware(['auth:user'])->group(function () {
 
-    //     // TOPページ
+        // TOPページ
         Route::get('/home', [HomeController::class, 'home'])->name('home');
-    //     // パスワード変更
-    //     Route::get('passwords/edit', [PasswordController::class, 'edit'])->name('passwords.edit');
-    //     Route::patch('passwords', [PasswordController::class, 'update'])->name('passwords.update');
+        // パスワード変更
+        // Route::get('passwords/edit', [PasswordController::class, 'edit'])->name('passwords.edit');
+        // Route::patch('passwords', [PasswordController::class, 'update'])->name('passwords.update');
+
+        Route::resource('users', UserController::class);
+        // Route::get('/index/{user} ', [UserController::class, 'index'])->name('users.index');
 
     //     Route::middleware(['check.user.project.access'])->group(function () {
 

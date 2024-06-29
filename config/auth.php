@@ -49,6 +49,10 @@ return [
             'driver' => 'session',
             'provider' => 'producers', // これは実際のプロバイダ名に合わせて修正してください
         ],
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -79,6 +83,10 @@ return [
         'producers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Producer::class, // これは実際のモデル名に合わせて修正してください
+        ],
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
         ],
     ],
 
@@ -120,6 +128,13 @@ return [
         // producer用を追加
         'producers' => [
             'provider' => 'producers',
+            'table' => 'password_resets',
+            'expire' => 2880,
+            'throttle' => 60,
+        ],
+        // customer用を追加
+        'customers' => [
+            'provider' => 'customers',
             'table' => 'password_resets',
             'expire' => 2880,
             'throttle' => 60,

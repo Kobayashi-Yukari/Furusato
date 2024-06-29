@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
-{   //config/appで定義
-    private const GUARD_USER = 'user';
-    private const GUARD_ADMIN = 'admin';
+
+{   
+
+    private const GUARD_USER     = 'user';
+    private const GUARD_ADMIN    = 'admin';
     private const GUARD_PRODUCER = 'producer';
+    private const GUARD_CUSTOMER = 'customer';
     /**
      * Handle an incoming request.
      *
@@ -41,6 +44,9 @@ class RedirectIfAuthenticated
         if(Auth::guard(self::GUARD_PRODUCER)->check()&& $request->routeIs('producer.*')){
             return redirect(RouteServiceProvider::PRODUCER_HOME);
         }
+        // if(Auth::guard(self::GUARD_CUSTOMER)->check() && $request->routeIs('customer.*')){
+        //     return redirect(RouteServiceProvider::CUSTOMER_HOME);
+        // }
 
         return $next($request);
     }

@@ -61,3 +61,20 @@ Route::get('producer_dev_login_id/{id}', function ($id) {
     auth()->guard('producer')->login(App\Models\Producer::find($id));
     return to_route('producer.home');
 })->name('producer_dev_login_id');
+
+
+
+// EC顧客ログイン(customer)
+Route::get('customer_dev_login', function () {
+    abort_unless(app()->environment('local'), 403);
+    auth()->guard('customer')->login(App\Models\Customer::first());
+    return to_route('customer.home');
+})->name('customer_dev_login');
+
+Route::get('customer_dev_login_id/{id}', function ($id) {
+    abort_unless(app()->environment('local'), 403);
+    auth()->guard('customer')->login(App\Models\Customer::find($id));
+    return to_route('customer.home');
+})->name('customer_dev_login_id');
+
+

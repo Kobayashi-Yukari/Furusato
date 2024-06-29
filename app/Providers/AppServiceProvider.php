@@ -18,14 +18,15 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
+    // TODO:開発環境に左右されるので、条件分岐で書けないか検討
     //  local環境
-    // public function boot(): void
-    // {
-        
-    // }
-    // 本番環境
-    public function boot(UrlGenerator $url) 
+    public function boot(): void
     {
-        $url->forceScheme('https');
+        
     }
+    // 本番環境
+    // public function boot(UrlGenerator $url) 
+    // {
+    //     $url->forceScheme('https');
+    // }
 }
